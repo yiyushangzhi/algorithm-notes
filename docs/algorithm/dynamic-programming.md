@@ -166,7 +166,7 @@ class Solution {
 + 从坐标点`(i-1,j)`向右移动一步，此时`dp[i][j]=dp[i-1][j]+grid[i][j]`
 + 从坐标点`(i, j-1)`向下移动一步，此时`dp[i][j]=dp[i][j-1]+grid[i][j]`
 
-所以转移方程为`dp[i][j]=min(dp[i-1][j], dp[i][j-1])`
+所以转移方程为`dp[i][j]=min(dp[i-1][j], dp[i][j-1])+grid[i][j]`
 
 ##### 确定条件边界
 
