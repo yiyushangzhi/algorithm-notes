@@ -65,6 +65,7 @@ class Solution {
 ## 经典例题
 
 -   [N 皇后](#N皇后)
+-   [子集](#子集)
 
 ## [N 皇后](https://leetcode-cn.com/problems/n-queens/)
 
@@ -140,4 +141,68 @@ class Solution {
         return true;
     }
 };
+```
+
+## [子集](https://leetcode-cn.com/problems/subsets/)
+
+```java
+class Solution {
+    private List<List<Integer>> answers = new LinkedList<>();
+    private List<Integer> answer = new LinkedList<>();
+    public List<List<Integer>> subsets(int[] nums) {
+        backtrack(nums, 0);
+        return answers;
+    }
+    private void backtrack(int[] nums, int start) {
+        answers.add(new LinkedList<>(answer));
+        for (int idx = start; idx < nums.length; idx++) {
+            answer.add(nums[idx]);
+            backtrack(nums, idx + 1);
+            answer.remove(answer.size() - 1);
+        }
+    }
+}
+```
+
+```java
+class Solution {
+    private List<List<Integer>> answers = new LinkedList<>();
+    private List<Integer> answer = new LinkedList<>();
+    public List<List<Integer>> subsets(int[] nums) {
+        dfs(nums, 0);
+        return answers;
+    }
+    private void dfs(int[] nums, int i) {
+       if (i == nums.length) {
+           answers.add(new LinkedList<>(answer));
+           return;
+       }
+
+       answer.add(nums[i]);
+       dfs(nums, i + 1);
+       answer.remove(answer.size() - 1);
+       dfs(nums, i + 1);
+   }
+}
+```
+
+```java
+class Solution {
+    private List<List<Integer>> answers = new LinkedList<>();
+    private List<Integer> answer = new LinkedList<>();
+    public List<List<Integer>> subsets(int[] nums) {
+        int size = nums.length;
+        int maxMask = 1 << size;
+        for (int mask = 0; mask < maxMask; ++mask) {
+            answer.clear();
+            for (int i = 0; i < size; i++) {
+                if ((mask & (1 << i)) != 0) {
+                    answer.add(nums[i]);
+                }
+            }
+            answers.add(new LinkedList<>(answer));
+        }
+        return answers;
+    }
+}
 ```
