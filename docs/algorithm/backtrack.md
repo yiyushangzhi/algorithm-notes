@@ -64,13 +64,14 @@ class Solution {
 
 ## 经典例题
 
--   [leetcode51 N 皇后](#leetcode51-n-皇后)
--   [leetcode78 子集](#leetcode78-子集)
--   [leetcode46 全排列](#leetcode46-全排列)
--   [leetcode47 全排列 II](#leetcode47-全排列-ii)
--   [leetcode39 组合总和](#leetcode39-组合总和)
+-   [LeetCode51 N 皇后](#leetcode51-n-皇后)
+-   [LeetCode78 子集](#leetcode78-子集)
+-   [LeetCode46 全排列](#leetcode46-全排列)
+-   [LeetCode47 全排列 II](#leetcode47-全排列-ii)
+-   [LeetCode39 组合总和](#leetcode39-组合总和)
+-   [LeetCode216 组合总和 III](#leetcode216-组合总和-iii)
 
-## [leetcode51 N 皇后](https://leetcode-cn.com/problems/n-queens/)
+## [LeetCode51 N 皇后](https://leetcode-cn.com/problems/n-queens/)
 
 ### 题目描述
 
@@ -146,7 +147,7 @@ class Solution {
 };
 ```
 
-## [leetcode78 子集](https://leetcode-cn.com/problems/subsets/)
+## [LeetCode78 子集](https://leetcode-cn.com/problems/subsets/)
 
 ### 解法一
 
@@ -216,7 +217,7 @@ class Solution {
 }
 ```
 
-## [leetcode46 全排列](https://leetcode-cn.com/problems/permutations/)
+## [LeetCode46 全排列](https://leetcode-cn.com/problems/permutations/)
 
 ### 解法一
 
@@ -276,7 +277,7 @@ class Solution {
 }
 ```
 
-## [leetcode47 全排列 II](https://leetcode-cn.com/problems/permutations-ii/)
+## [LeetCode47 全排列 II](https://leetcode-cn.com/problems/permutations-ii/)
 
 [全排列](#leetcode46-全排列)的变种，需要去除重复记录。只需要将数组先排序一下，然后只保留从左到右第一个元素即可。
 
@@ -368,7 +369,7 @@ class Solution {
 
 > 可以发现，剪枝函数`isRepeatNumber`的实现不同，时间开销也不同。具体差异，见[leetcode 分析](https://leetcode-cn.com/problems/permutations-ii/solution/hui-su-suan-fa-python-dai-ma-java-dai-ma-by-liwe-2/)
 
-## [leetcode39 组合总和](https://leetcode-cn.com/problems/combination-sum/)
+## [LeetCode39 组合总和](https://leetcode-cn.com/problems/combination-sum/)
 
 第一反应是套用回溯算法通用公式，由于可以元素可以重复计算，所以就不维护`visits[i]`来表示元素是否访问过。于是可以得到如下代码：
 
@@ -436,6 +437,7 @@ public class Solution {
 ```
 
 :::tip
+
 -   执行结果：通过
 -   执行用时：5 ms, 在所有 Java 提交中击败了 31.60%的用户
 -   内存消耗：38.9 MB, 在所有 Java 提交中击败了 16.46%的用户
@@ -472,6 +474,47 @@ class Solution {
 -   执行结果：通过
 -   执行用时：3 ms, 在所有 Java 提交中击败了 79.52%的用户
 -   内存消耗：38.7 MB, 在所有 Java 提交中击败了 46.65%的用户
+:::
+
+## [LeetCode216 组合总和 III](https://leetcode-cn.com/problems/combination-sum-iii/)
+
+```java
+class Solution {
+    public List<List<Integer>> combinationSum3(int k, int n) {
+        List<List<Integer>> answers = new LinkedList<>();
+        Deque<Integer> answer = new LinkedList<>();
+        backtrace(answers, answer, n, k, 1);
+        return answers;
+    }
+
+    private void backtrace(List<List<Integer>> answers, Deque<Integer> answer, int target, int size, int start) {
+        if (target < 0) {
+            return;
+        }
+        if (target == 0) {
+            if (answer.size() == size) {
+                answers.add(new LinkedList<>(answer));
+            }
+            return;
+        }
+
+        for (int i = start; i < 10; i++) {
+            if (target - i < 0) {
+                return;
+            }
+            answer.add(i);
+            backtrace(answers, answer, target - i, size, i + 1);
+            answer.remove(i);
+        }
+    }
+}
+```
+
+:::tip
+
+-   执行结果：通过
+-   执行用时：1 ms, 在所有 Java 提交中击败了 53.06%的用户
+-   内存消耗：36 MB, 在所有 Java 提交中击败了 62.83%的用户
 :::
 
 ## 迷宫路径
