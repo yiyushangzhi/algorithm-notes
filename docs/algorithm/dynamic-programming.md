@@ -7,14 +7,16 @@
 ## 经典例题
 
 -   计数问题
-    -   [不同路径](#不同路径)
+    -   [LeetCode62 不同路径](#leetcode62-不同路径)
 -   最值问题
-    -   [最小路径和](#最小路径和)
-    -   [最大子序列和](#最大子序列和)
-    -   [零钱兑换](#零钱兑换)
-    -   [编辑距离](#编辑距离)
+    -   [LeetCode64 最小路径和](#leetcode64-最小路径和)
+    -   [LeetCode53 最大子序列和](#leetcode53-最大子序列和)
+    -   [LeetCode322 零钱兑换](#leetcode322-零钱兑换)
+    -   [LeetCode72 编辑距离](#leetcode72-编辑距离)
+    -   [LeetCode410 分割数组的最大值](#leetcode410-分割数组的最大值)
+    -   [LeetCode1240 铺瓷砖](#leetcode1240-铺瓷砖)
 -   存在性问题
-    -   [青蛙过河](#青蛙过河)
+    -   [LeetCode403 青蛙过河](#leetcode403-青蛙过河)
 
 ## 解题套路
 
@@ -25,7 +27,7 @@
 
 ## 计数问题
 
-### [不同路径](https://leetcode-cn.com/problems/unique-paths/)
+### [LeetCode62 不同路径](https://leetcode-cn.com/problems/unique-paths/)
 
 #### 题目描述
 
@@ -121,7 +123,7 @@ class Solution {
 
 ## 最值问题
 
-### [最小路径和](https://leetcode-cn.com/problems/minimum-path-sum/)
+### [LeetCode64 最小路径和](https://leetcode-cn.com/problems/minimum-path-sum/)
 
 #### 题目描述
 
@@ -200,7 +202,7 @@ class Solution {
 }
 ```
 
-### [最大子序列和](https://leetcode-cn.com/problems/maximum-subarray/)
+### [LeetCode53 最大子序列和](https://leetcode-cn.com/problems/maximum-subarray/)
 
 #### 题目描述
 
@@ -303,7 +305,7 @@ class Solution {
 }
 ```
 
-### [零钱兑换](https://leetcode-cn.com/problems/coin-change/)
+### [LeetCode322 零钱兑换](https://leetcode-cn.com/problems/coin-change/)
 
 #### 题目描述
 
@@ -394,7 +396,7 @@ class Solution {
 }
 ```
 
-### [编辑距离](https://leetcode-cn.com/problems/edit-distance/)
+### [LeetCode72 编辑距离](https://leetcode-cn.com/problems/edit-distance/)
 
 #### 题目描述
 
@@ -543,11 +545,74 @@ public class Solution {
 }
 ```
 
+### [LeetCode1240 铺瓷砖](https://leetcode-cn.com/problems/tiling-a-rectangle-with-the-fewest-squares/)
 
+#### 解题思路
+
+##### 定义最优子结构
+
+假设`dp[i][j]`表示铺满`i*j`的客厅最小需要使用到的方形瓷砖数量。
+
+##### 确定转移方程
+
+任意一个矩形都最多可以分割成5个小矩形。假设右下角的矩形为正方形，且其边长为k。
+
+![image-20210716201136673](../asserts/leetcode1240.png)
+
+所以，转移方程为`dp[i][j]=min(dp[x][y]+dp[i-k][j-y]+dp[i-x][j-k]+dp[i+k-x][y-j+k]+1)`，其中：
+
++ `k`的取值范围为`[1, min(i, j)]`
++ `x`的取值范围为`[0, i-k]`
++ `y`的取值范围为`[j-k, j]`
+
+##### 确定条件边界
+
+很明显：
+
++ `dp[i][0]=0`，其中`0 <= i <= n`
++ `dp[0][j]=0`，其中`0 <= j <= m`
+
+#### 代码
+
+```java
+class Solution {
+    public int tilingRectangle(int n, int m) {
+        int[][] dp = new int[n + 1][m + 1];
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= m; j++) {
+                if (i == j) {
+                    dp[i][j] = 1;
+                    continue;
+                }
+                dp[i][j] = Integer.MAX_VALUE;
+                for (int k = 1; k <= Math.min(i, j); k++) {
+                    for (int x = 0; x <= i - k; x++) {
+                        for (int y = j - k; y <= j; y++) {
+                            dp[i][j] = Math.min(dp[i][j], 1 + dp[x][y] + dp[i - k][j - y] + dp[i - x][j - k] + dp[i - k - x][y - j + k]);
+                        }
+                    }
+                }
+            }
+        }
+
+        return dp[n][m];
+    }
+}
+```
+
+===tip
+
+执行结果：通过
+
+执行用时：4 ms, 在所有 Java 提交中击败了50.70%的用户
+
+内存消耗：35.2 MB, 在所有 Java 提交中击败了60.56%的用户
+
+===
 
 ## 存在性问题
 
-### [青蛙过河](https://leetcode-cn.com/problems/frog-jump/)
+### [LeetCode403 青蛙过河](https://leetcode-cn.com/problems/frog-jump/)
 
 #### 题目描述
 
