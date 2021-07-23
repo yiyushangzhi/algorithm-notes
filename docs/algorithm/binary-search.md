@@ -4,7 +4,7 @@
 
 -   [LeetCode410 分割数组的最大值](#LeetCode410-分割数组的最大值)
 
-##[LeetCode410 分割数组的最大值](https://leetcode-cn.com/problems/split-array-largest-sum/)
+## [LeetCode410 分割数组的最大值](https://leetcode-cn.com/problems/split-array-largest-sum/)
 
 **使...最大值尽可能小**是二分搜索题目的经典问法。
 

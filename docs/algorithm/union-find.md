@@ -2,15 +2,13 @@
 
 ## 经典例题
 
-+ [LeetCode990 等式方程的可满足性](#leetcode990-等式方程的可满足性)
-+ [LeetCode547 省份数量](#leetcode547-省份数量)
-+ [LeetCode200 岛屿数量](#leetcode200-岛屿数量)
-+ [LeetCode684 冗余连接](#leetcode684-冗余连接)
-+ [LeetCode1319 连通网络的操作次数](#leetcode-连通网络的操作次数)
-+ [LeetCode399-](#leetcode399-)
-+ [LeetCode952-](#leetcode952-)
-
-
+-   [LeetCode990 等式方程的可满足性](#leetcode990-等式方程的可满足性)
+-   [LeetCode547 省份数量](#leetcode547-省份数量)
+-   [LeetCode200 岛屿数量](#leetcode200-岛屿数量)
+-   [LeetCode684 冗余连接](#leetcode684-冗余连接)
+-   [LeetCode1319 连通网络的操作次数](#leetcode-连通网络的操作次数)
+-   [LeetCode399-](#leetcode399-)
+-   [LeetCode952-](#leetcode952-)
 
 ## [LeetCode990 等式方程的可满足性](https://leetcode-cn.com/problems/satisfiability-of-equality-equations/)
 
@@ -47,7 +45,7 @@ class Solution {
             parent[index] = parent[parent[index]];
             index = parent[index];
         }
-        return index; 
+        return index;
     }
 
     private void union(int[] parent, int index1, int index2) {
@@ -58,9 +56,9 @@ class Solution {
 
 :::tip
 
- * 执行结果：通过
- * 执行用时：0 ms, 在所有 Java 提交中击败了100.00%的用户
- * 内存消耗：38.2 MB, 在所有 Java 提交中击败了12.47%的用户
+-   执行结果：通过
+-   执行用时：0 ms, 在所有 Java 提交中击败了 100.00%的用户
+-   内存消耗：38.2 MB, 在所有 Java 提交中击败了 12.47%的用户
 :::
 
 ### 解法二：合并集（递归查找）
@@ -97,7 +95,7 @@ class Solution {
         } else {
             parent[index] = find(parent, parent[index]);
             return parent[index];
-        } 
+        }
     }
 
     private void union(int[] parent, int index1, int index2) {
@@ -107,9 +105,10 @@ class Solution {
 ```
 
 :::tip
-+ 执行结果：通过
-+ 执行用时：1 ms, 在所有 Java 提交中击败了99.72%的用户
-+ 内存消耗：37.8 MB, 在所有 Java 提交中击败了84.47%的用户
+
+-   执行结果：通过
+-   执行用时：1 ms, 在所有 Java 提交中击败了 99.72%的用户
+-   内存消耗：37.8 MB, 在所有 Java 提交中击败了 84.47%的用户
 :::
 
 ## [LeetCode547 省份数量](https://leetcode-cn.com/problems/number-of-provinces/)
@@ -213,9 +212,10 @@ class Solution {
 ```
 
 :::tip
-* 执行结果：通过
-* 执行用时：1 ms, 在所有 Java 提交中击败了99.14%的用户
-* 内存消耗：39.5 MB, 在所有 Java 提交中击败了31.86%的用户
+
+-   执行结果：通过
+-   执行用时：1 ms, 在所有 Java 提交中击败了 99.14%的用户
+-   内存消耗：39.5 MB, 在所有 Java 提交中击败了 31.86%的用户
 :::
 
 ## [LeetCode200 岛屿数量](https://leetcode-cn.com/problems/number-of-islands/)
@@ -283,9 +283,10 @@ public class Solution {
 ```
 
 :::tip
-* 执行结果：通过
-* 执行用时：2 ms, 在所有 Java 提交中击败了88.69%的用户
-* 内存消耗：41 MB, 在所有 Java 提交中击败了23.64%的用户
+
+-   执行结果：通过
+-   执行用时：2 ms, 在所有 Java 提交中击败了 88.69%的用户
+-   内存消耗：41 MB, 在所有 Java 提交中击败了 23.64%的用户
 :::
 
 ### 解法二：合并集
@@ -375,9 +376,10 @@ class Solution {
 ```
 
 :::tip
-* 执行结果：通过
-* 执行用时：8 ms, 在所有 Java 提交中击败了5.25%的用户
-* 内存消耗：40.8 MB, 在所有 Java 提交中击败了67.95%的用户
+
+-   执行结果：通过
+-   执行用时：8 ms, 在所有 Java 提交中击败了 5.25%的用户
+-   内存消耗：40.8 MB, 在所有 Java 提交中击败了 67.95%的用户
 :::
 
 ### 解法三：BFS
@@ -427,9 +429,10 @@ class Solution {
 ```
 
 :::tip
-* 执行结果：通过
-* 执行用时：5 ms, 在所有 Java 提交中击败了17.74%的用户
-* 内存消耗：40.8 MB, 在所有 Java 提交中击败了61.37%的用户
+
+-   执行结果：通过
+-   执行用时：5 ms, 在所有 Java 提交中击败了 17.74%的用户
+-   内存消耗：40.8 MB, 在所有 Java 提交中击败了 61.37%的用户
 :::
 
 ### 解法四：DFS
@@ -475,9 +478,10 @@ class Solution {
 ```
 
 :::tip
-* 执行结果：通过
-* 执行用时：1 ms, 在所有 Java 提交中击败了100.00%的用户
-* 内存消耗：40.9 MB, 在所有 Java 提交中击败了39.64%的用户
+
+-   执行结果：通过
+-   执行用时：1 ms, 在所有 Java 提交中击败了 100.00%的用户
+-   内存消耗：40.9 MB, 在所有 Java 提交中击败了 39.64%的用户
 :::
 
 ## [LeetCode684 冗余连接](https://leetcode-cn.com/problems/redundant-connection/)
@@ -517,9 +521,10 @@ public class Solution {
 ```
 
 :::tip
-* 执行结果：通过
-* 执行用时：0 ms, 在所有 Java 提交中击败了100.00%的用户
-* 内存消耗：38.3 MB, 在所有 Java 提交中击败了95.69%的用户
+
+-   执行结果：通过
+-   执行用时：0 ms, 在所有 Java 提交中击败了 100.00%的用户
+-   内存消耗：38.3 MB, 在所有 Java 提交中击败了 95.69%的用户
 :::
 
 ## [LeetCode1319 连通网络的操作次数](https://leetcode-cn.com/problems/number-of-operations-to-make-network-connected/)
@@ -561,7 +566,8 @@ public class Solution {
 ```
 
 :::tip
-+ 执行结果：通过
-+ 执行用时：3 ms, 在所有 Java 提交中击败了99.50%的用户
-+ 内存消耗：52.2 MB, 在所有 Java 提交中击败了82.73%的用户
+
+-   执行结果：通过
+-   执行用时：3 ms, 在所有 Java 提交中击败了 99.50%的用户
+-   内存消耗：52.2 MB, 在所有 Java 提交中击败了 82.73%的用户
 :::
