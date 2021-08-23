@@ -20,6 +20,7 @@ class Solution {
             }
         }
         while (left < right) {
+            // 求middle的方法有很多。但为了避免溢出，推荐使用middle = left + ((right - left) >> 1)
             int middle = (right - left) / 2 + left;
             if (check(nums, middle, m)) {
                 right = middle;

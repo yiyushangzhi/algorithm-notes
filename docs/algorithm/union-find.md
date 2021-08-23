@@ -1,5 +1,198 @@
 # 并查集
 
+并查集，主要用来解决**元素分组**的问题。主要分成2个关键步骤：
+
+1. 查询（Find）：查询元素的根节点
+2. 合并（Union）：将2个不相交的集合合并成一个集合
+
+## 代码套路
+
+```java
+class UnionFind {
+    /**
+     * 探测图中是否存在环
+     *
+     * @param edges    构成图的边集合
+     * @param vertices 构成图的顶点数量
+     */
+    public boolean detectCycle(int[][] edges, int vertices) {
+        // 首先，我们申请1个一位数组来存储每个节点对应的父节点。
+        // 该数组下标表示节点，元素值表示父节点。
+        int[] parent = new int[vertices];
+        initialize(parent);
+
+        for (int i = 0; i < edges.length; i++) {
+            int[] edge = edges[i];
+            int x = edge[0];
+            int y = edge[1];
+            // 若存在两个根节点相同的节点，则表示图中存在环。
+            if (find(parent, x) == find(parent, y)) {
+                return true;
+            }
+            union(parent, x, y);
+        }
+
+        return false;
+    }
+
+    /**
+     * 初始化操作：每个节点的父节点初始为其本身。表示该节点单独一组。
+     */
+    private void initialize(int[] parent) {
+        for (int i = 0; i < parent.length; i++) {
+            parent[i] = i;
+        }
+    }
+
+    /**
+     * 合并操作
+     */
+    private void union(int[] parent, int x, int y) {
+        // 分别先找到2个节点的根节点。
+        int xRoot = find(parent, x);
+        int yRoot = find(parent, y);
+        // 然后合并成新树，以xRoot和yRoot为根节点都可以。
+        // 个人习惯，以yRoot为根节点。
+        parent[xRoot] = yRoot;
+    }
+
+    /**
+     * 查找操作
+     */
+    private int find(int[] parent, int x) {
+        int root = x;
+        // 若某个节点为根节点，则其父节点必然是其本身。
+        while (parent[root] != root) {
+            root = parent[root];
+        }
+        return root;
+    }
+
+    public static void main(String[] args) {
+        UnionFind solution = new UnionFind();
+        System.out.println(solution.detectCycle(new int[][]{{0, 1}, {1, 2}, {2, 3}, {3, 4}, {4, 5}}, 6));
+        System.out.println(solution.detectCycle(new int[][]{{0, 1}, {1, 2}, {2, 3}, {3, 4}, {4, 5}, {5, 0}}, 6));
+        System.out.println(solution.detectCycle(new int[][]{{0, 1}, {1, 2}, {2, 3}, {3, 4}, {4, 5}, {3, 4}}, 6));
+    }
+}
+```
+
+上面所给出的示例中，查询操作的实现方式采用的是循环方式。也可以使用递归方式：
+
+```java
+class UnionFind {
+    private int find(int[] parent, int x) {
+        if (parent[x] == x) {
+            return find(parent[x]);
+        }
+        return parent[x];
+    }
+}
+```
+
+查询操作（`find`）的作用是查找节点对应的根节点。所以，每次都需要从当前节点开始从下往上找。极端情况下，树的每一层都只有1个节点。此时，每次要找到叶子节点对应的根节点时，都需要将整棵树遍历一次。那么，都有哪些优化手段？
+
+### 路径压缩
+
+最常见的查处操作优化手段是**路径压缩**。其主要的逻辑是在查找时，将查找路径进行压缩，即将当前节点的父节点更新为**父节点的父节点**或**根节点**。如此，大大缩短了再次查询的查找路径。
+
+**循环方式**
+
+```java
+class UnionFind {
+    private int find(int[] parent, int x) {
+        int root = x;
+        while (parent[root] != root) {
+            // 将父节点更新成父节点的父节点
+            parent[root] = parent[parent[root]];
+            root = parent[root];
+        }
+        return root;
+    }
+}
+```
+
+**递归方式：**
+
+```java
+class UnionFind {
+    private int find(int[] parent, int x) {
+        if (parent[x] != x) {
+            // 将父节点更新成根节点
+            parent[x] = find(parent, parent[x]);
+        }
+        return parent[x];
+    }
+}
+```
+
+### 按秩合并
+
+**压缩路径**是在查询操作时进行优化，而**按秩合并**则是在合并操作时进行优化。我们知道如果树的高越低，则查找路径越短。所以，我们只要保证合并以后的树的高尽可能低，则查找路径必然更短。
+
+```java
+class RankUnionFind {
+    public boolean detectCircle(int[][] edges, int vertices) {
+
+        int[] parent = new int[vertices];
+        // 申明秩数组，表示以该节点为根节点的树的高度。秩初始值为0。
+        int[] rank = new int[vertices];
+        initialize(parent);
+
+        for (int i = 0; i < edges.length; i++) {
+            int[] edge = edges[i];
+            int x = edge[0];
+            int y = edge[1];
+            if (find(parent, x) == find(parent, y)) {
+                return true;
+            }
+            union(parent, rank, x, y);
+        }
+
+        return false;
+    }
+
+    private void initialize(int[] parent) {
+        for (int i = 0; i < parent.length; i++) {
+            parent[i] = i;
+        }
+    }
+
+    private int find(int[] parent, int x) {
+        if (parent[x] != x) {
+            return find(parent, parent[x]);
+        }
+        return parent[x];
+    }
+
+    private void union(int[] parent, int[] rank, int x, int y) {
+        int xRoot = find(parent, x);
+        int yRoot = find(parent, y);
+        // 以秩大（树的高度更高）的树根节点为新树的更节点
+        // 即秩小指向秩大。
+        // 合并的新树高度不变，不需要更新秩。
+        if (rank[xRoot] > rank[yRoot]) {
+            parent[yRoot] = xRoot;
+        } else if (rank[xRoot] < rank[yRoot]) {
+            parent[xRoot] = yRoot;
+        } else {
+            // 秩相同，以xRoot或yRoot为新树的根节点都可以。
+            // 个人习惯以，yRoot为根节点。
+            // 合并成新树后，需要更新根节点的秩。
+            parent[xRoot] = yRoot;
+            ++rank[yRoot];
+        }
+    }
+
+    public static void main(String[] args) {
+        RankUnionFind solution = new RankUnionFind();
+        System.out.println(solution.detectCircle(new int[][]{
+                {0, 1}, {1, 2}, {2, 3}, {3, 4}, {4, 5}, {4, 1}
+        }, 6));
+    }
+}
+```
+
 ## 经典例题
 
 -   [LeetCode990 等式方程的可满足性](#leetcode990-等式方程的可满足性)
