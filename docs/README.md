@@ -13,3 +13,4 @@
 -   [并查集](./algorithm/union-find.md)
 -   [滑动窗口](./algorithm/sliding-window.md)
 -   [快慢指针](./algorithm/fast-slow-pointer.md)
+-   [前缀和与差分](./algorithm/prefix-sum-difference.md)
