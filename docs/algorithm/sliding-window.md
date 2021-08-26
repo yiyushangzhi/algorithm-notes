@@ -1,6 +1,14 @@
 # 滑动窗口
 
-**滑动窗口算法**，通过不断调整区间（窗口）的起始位置（start）和结束位置（end），以获取满足条件的结果。可以用来求解数组、链表或字符串**连续的子串**相关问题。
+**滑动窗口算法**，可以用来解决求数组/字符串中满足一定条件的连续子数组/字符串的问题。
+
+经典提问方式**请找出满足XXX的最XX的连续区间**。
+
+申明`left`和`right`分别代表窗口的起始位置和结束位置，通过不断移动窗口的位置来解决问题。
+
+滑动过程中，窗口的大小可能改变，也可能不变。
+
+可以将`O(n^2)`的嵌套循环简化成`O(n)`的单循环，减低时间复杂度。
 
 ## 经典例题
 
@@ -32,9 +40,7 @@ class Solution {
 }
 ```
 
-:::tip
-
--   执行结果：通过
+:::tip 执行结果：通过
 -   执行用时：19 ms, 在所有 Java 提交中击败了 17.30%的用户
 -   内存消耗：38.6 MB, 在所有 Java 提交中击败了 34.38%的用户
 :::
@@ -64,9 +70,7 @@ class Solution {
 }
 ```
 
-:::tip
-
--   执行结果：通过
+:::tip 执行结果：通过
 -   执行用时：18 ms, 在所有 Java 提交中击败了17.60%的用户
 -   内存消耗：38.4 MB, 在所有 Java 提交中击败了77.82%的用户
 :::
@@ -95,10 +99,34 @@ class Solution {
 }
 ```
 
-:::tip
--   执行结果：通过
+:::tip 执行结果：通过
 -   执行用时：6 ms, 在所有 Java 提交中击败了79.95%的用户
 -   内存消耗：38.4 MB, 在所有 Java 提交中击败了78.88%的用户
+:::
+
+```java
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        int length = s.length();
+        int left = 0;
+        int max = 0;
+        Set<Character> exits = new HashSet<>();
+        for (int right = 0; right < length; right++) {
+            while (exits.contains(s.charAt(right))) {
+                exits.remove(s.charAt(left));
+                ++left;
+            }
+            exits.add(s.charAt(right));
+            max = Math.max(max, exits.size());
+        }
+        return max;
+    }
+}
+```
+
+:::tip 执行结果：通过
+-   执行用时：6 ms, 在所有 Java 提交中击败了77.97%的用户
+-   内存消耗：38.7 MB, 在所有 Java 提交中击败了29.87%的用户
 :::
 
 ## [LeetCode76 最小覆盖子串](https://leetcode-cn.com/problems/minimum-window-substring/)
@@ -156,8 +184,7 @@ class Solution {
 }
 ```
 
-:::tip
--   执行结果：通过
+:::tip 执行结果：通过
 -   执行用时：55 ms, 在所有 Java 提交中击败了27.83%的用户
 -   内存消耗：39 MB, 在所有 Java 提交中击败了51.33%的用户
 :::
@@ -192,10 +219,34 @@ class Solution {
 }
 ```
 
-:::tip
--   执行结果：通过
+:::tip 执行结果：通过
 -   执行用时：1 ms, 在所有 Java 提交中击败了99.98%的用户
 -   内存消耗：38.4 MB, 在所有 Java 提交中击败了52.87%的用户
+:::
+
+
+```java
+class Solution {
+    public int minSubArrayLen(int target, int[] nums) {
+        int left = 0;
+        int sum = 0;
+        int min = Integer.MAX_VALUE;
+        for (int right = 0; right < nums.length; right++) {
+            sum += nums[right];
+            while (sum >= target) {
+                min = Math.min(min, right - left + 1);
+                sum -= nums[left];
+                ++left;
+            }
+        }
+        return min == Integer.MAX_VALUE ? 0 : min;
+    }
+}
+```
+
+:::tip 执行结果：通过
+-   执行用时：1 ms, 在所有 Java 提交中击败了99.98%的用户
+-   内存消耗：38.5 MB, 在所有 Java 提交中击败了22.16%的用户
 :::
 
 官方答案：
