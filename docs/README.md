@@ -3,6 +3,7 @@
 ## 数据结构
 
 -   [树](./structure/tree.md)
+-   [字典树/前缀树](./structure/trie.md)
 
 ## 算法练习
 
