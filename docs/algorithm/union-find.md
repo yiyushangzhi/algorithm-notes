@@ -229,8 +229,9 @@ class RankUnionFind {
 -   [LeetCode200 岛屿数量](#leetcode200-岛屿数量)
 -   [LeetCode684 冗余连接](#leetcode684-冗余连接)
 -   [LeetCode1319 连通网络的操作次数](#leetcode-连通网络的操作次数)
--   [LeetCode399-](#leetcode399-)
--   [LeetCode952-](#leetcode952-)
+-   [LeetCode959 由斜杠划分区域](#leetcode959-由斜杠划分区域)
+-   [LeetCode399 除法求值](#leetcode399-除法求值)
+-   [LeetCode952 按公因数计算最大组件大小](#leetcode952-按公因数计算最大组件大小)
 
 ## [LeetCode990 等式方程的可满足性](https://leetcode-cn.com/problems/satisfiability-of-equality-equations/)
 
@@ -276,9 +277,7 @@ class Solution {
 }
 ```
 
-:::tip
-
--   执行结果：通过
+:::tip 执行结果：通过
 -   执行用时：0 ms, 在所有 Java 提交中击败了 100.00%的用户
 -   内存消耗：38.2 MB, 在所有 Java 提交中击败了 12.47%的用户
 :::
@@ -326,9 +325,7 @@ class Solution {
 }
 ```
 
-:::tip
-
--   执行结果：通过
+:::tip 执行结果：通过
 -   执行用时：1 ms, 在所有 Java 提交中击败了 99.72%的用户
 -   内存消耗：37.8 MB, 在所有 Java 提交中击败了 84.47%的用户
 :::
@@ -433,9 +430,7 @@ class Solution {
 }
 ```
 
-:::tip
-
--   执行结果：通过
+:::tip 执行结果：通过
 -   执行用时：1 ms, 在所有 Java 提交中击败了 99.14%的用户
 -   内存消耗：39.5 MB, 在所有 Java 提交中击败了 31.86%的用户
 :::
@@ -504,9 +499,7 @@ public class Solution {
 }
 ```
 
-:::tip
-
--   执行结果：通过
+:::tip 执行结果：通过
 -   执行用时：2 ms, 在所有 Java 提交中击败了 88.69%的用户
 -   内存消耗：41 MB, 在所有 Java 提交中击败了 23.64%的用户
 :::
@@ -597,9 +590,7 @@ class Solution {
 }
 ```
 
-:::tip
-
--   执行结果：通过
+:::tip 执行结果：通过
 -   执行用时：8 ms, 在所有 Java 提交中击败了 5.25%的用户
 -   内存消耗：40.8 MB, 在所有 Java 提交中击败了 67.95%的用户
 :::
@@ -650,9 +641,7 @@ class Solution {
 }
 ```
 
-:::tip
-
--   执行结果：通过
+:::tip 执行结果：通过
 -   执行用时：5 ms, 在所有 Java 提交中击败了 17.74%的用户
 -   内存消耗：40.8 MB, 在所有 Java 提交中击败了 61.37%的用户
 :::
@@ -699,9 +688,7 @@ class Solution {
 }
 ```
 
-:::tip
-
--   执行结果：通过
+:::tip 执行结果：通过
 -   执行用时：1 ms, 在所有 Java 提交中击败了 100.00%的用户
 -   内存消耗：40.9 MB, 在所有 Java 提交中击败了 39.64%的用户
 :::
@@ -742,9 +729,7 @@ public class Solution {
 
 ```
 
-:::tip
-
--   执行结果：通过
+:::tip 执行结果：通过
 -   执行用时：0 ms, 在所有 Java 提交中击败了 100.00%的用户
 -   内存消耗：38.3 MB, 在所有 Java 提交中击败了 95.69%的用户
 :::
@@ -787,9 +772,194 @@ public class Solution {
 }
 ```
 
-:::tip
-
--   执行结果：通过
+:::tip 执行结果：通过
 -   执行用时：3 ms, 在所有 Java 提交中击败了 99.50%的用户
 -   内存消耗：52.2 MB, 在所有 Java 提交中击败了 82.73%的用户
 :::
+
+## [LeetCode959 由斜杠划分区域](https://leetcode-cn.com/problems/regions-cut-by-slashes/)
+
+
+```java
+class Solution {
+    public int regionsBySlashes(String[] grid) {
+        int grs = grid.length;
+        int gcs = grid[0].length();
+
+        UnionFind unionFind = new UnionFind(4 * grs * gcs);
+        for (int r = 0; r < grs; r++) {
+            for (int c = 0; c < gcs; c++) {
+                int index = 4 * (r * grs + c);
+                char ch = grid[r].charAt(c);
+                // 单元格内合并
+                if (ch == '\\') {
+                    // 右上部分合并
+                    unionFind.union(index, index + 1);
+                    // 左下部分合并
+                    unionFind.union(index + 2, index + 3);
+                } else if (ch == '/') {
+                    // 左上部分合并
+                    unionFind.union(index, index + 3);
+                    // 右下部分合并
+                    unionFind.union(index + 1, index + 2);
+                } else {
+                    // 右上部分合并
+                    unionFind.union(index, index + 1);
+                    // 右下部分合并
+                    unionFind.union(index + 1, index + 2);
+                    // 左下部分合并
+                    unionFind.union(index + 2, index + 3);
+                }
+                // 单元格间合并
+                if (c + 1 < gcs) {
+                    // 向右合并
+                    unionFind.union(index + 1, 4 * (r * grs + c + 1) + 3);
+                }
+                if (r + 1 < grs) {
+                    //向下合并
+                    unionFind.union(index + 2, 4 * ((r + 1) * grs + c));
+                }
+            }
+        }
+        return unionFind.count;
+    }
+
+    private static class UnionFind {
+        private int[] parent;
+        private int count;
+
+        public UnionFind(int capacity) {
+            this.count = capacity;
+            this.parent = new int[capacity];
+            this.init(capacity);
+        }
+
+        private void init(int capacity) {
+            for (int x = 0; x < capacity; x++) {
+                this.parent[x] = x;
+            }
+        }
+
+        public void union(int x, int y) {
+            int rootX = find(x);
+            int rootY = find(y);
+            if (rootX == rootY) {
+                return;
+            }
+            this.parent[rootY] = rootX;
+            --this.count;
+        }
+
+        private int find(int x) {
+            while (this.parent[x] != x) {
+                this.parent[x] = this.parent[this.parent[x]];
+                x = this.parent[x];
+            }
+            return x;
+        }
+    }
+}
+```
+
+:::tip 执行结果：通过
+-   执行用时：3 ms, 在所有 Java 提交中击败了 96.32%的用户
+-   内存消耗：37.7 MB, 在所有 Java 提交中击败了 62.63%的用户
+:::
+
+## [LeetCode399 除法求值](https://leetcode-cn.com/problems/evaluate-division/)
+
+```java
+class Solution {
+    public double[] calcEquation(List<List<String>> equations, double[] values, List<List<String>> queries) {
+        int equationsSize = equations.size();
+        // 最极端的情况：等式内出现的变量名不出现重复
+        UnionFind unionFind = new UnionFind(equationsSize * 2);
+        // 将字符串哈希成数字，方便并查集的实现
+        Map<String, Integer> hash = new HashMap<>(equationsSize * 2);
+        int id = 0;
+        for (int i = 0; i < equationsSize; i++) {
+            List<String> equation = equations.get(i);
+            String var1 = equation.get(0);
+            String var2 = equation.get(1);
+            if (!hash.containsKey(var1)) {
+                hash.put(var1, id++);
+            }
+            if (!hash.containsKey(var2)) {
+                hash.put(var2, id++);
+            }
+            unionFind.union(hash.get(var1), hash.get(var2), values[i]);
+        }
+        int queriesSize = queries.size();
+        double[] answer = new double[queriesSize];
+        for (int i = 0; i < queriesSize; i++) {
+            List<String> query = queries.get(i);
+            String var1 = query.get(0);
+            String var2 = query.get(1);
+            Integer id1 = hash.get(var1);
+            Integer id2 = hash.get(var2);
+            if (id1 == null || id2 == null) {
+                answer[i] = -1.0d;
+            } else {
+                answer[i] = unionFind.isConnected(id1, id2);
+            }
+
+        }
+        return answer;
+    }
+
+    private static class UnionFind {
+        private final int[] parent;
+        /**
+         * 指向的父节点的权值
+         */
+        private final double[] weight;
+
+        public UnionFind(int size) {
+            this.parent = new int[size];
+            this.weight = new double[size];
+            for (int i = 0; i < size; i++) {
+                this.parent[i] = i;
+                this.weight[i] = 1.0d;
+            }
+        }
+
+        public double isConnected(int x, int y) {
+            int rootX = find(x);
+            int rootY = find(y);
+            if (rootX == rootY) {
+                return weight[x] / weight[y];
+            } else {
+                return -1.0d;
+            }
+        }
+
+        public void union(int x, int y, double value) {
+            int rootX = find(x);
+            int rootY = find(y);
+            if (rootX == rootY) {
+                return;
+            }
+            parent[rootX] = rootY;
+            weight[rootX] = weight[y] * value / weight[x];
+        }
+
+        private int find(int x) {
+            if (x != parent[x]) {
+                int origin = parent[x];
+                parent[x] = find(parent[x]);
+                weight[x] = weight[x] * weight[origin];
+            }
+            return parent[x];
+        }
+    }
+}
+```
+
+:::tip 执行结果：通过
+-   执行用时：0 ms, 在所有 Java 提交中击败了100.00%的用户
+-   内存消耗：37.1 MB, 在所有 Java 提交中击败了74.46%的用户
+:::
+
+## [LeetCode952 按公因数计算最大组件大小](https://leetcode-cn.com/problems/largest-component-size-by-common-factor/)
+
+todo
