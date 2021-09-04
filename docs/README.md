@@ -16,3 +16,4 @@
 -   [快慢指针](./algorithm/fast-slow-pointer.md)
 -   [前缀和与差分](./algorithm/prefix-sum-difference.md)
 -   [分治法](./algorithm/divide-and-conquer.md)
+-   [贪心算法](./algorithm/greedy.md)
