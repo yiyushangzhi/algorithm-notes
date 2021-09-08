@@ -17,3 +17,4 @@
 -   [前缀和与差分](./algorithm/prefix-sum-difference.md)
 -   [分治法](./algorithm/divide-and-conquer.md)
 -   [贪心算法](./algorithm/greedy.md)
+-   [背包问题](./algorithm/knapsack-problem.md)
