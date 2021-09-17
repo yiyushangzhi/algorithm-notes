@@ -45,11 +45,14 @@ class Solution {
         int right = nums.length - 1;
         while (left <= right) {
             int middle = left + ((right - left) >> 1);
+            // 先找到目标元素
             if (nums[middle] == target) {
                 int[] answer = new int[]{middle, middle};
+                // 向左找到第一个位置
                 for (int i = middle - 1; i >= 0 && nums[i] == target; --i) {
                     answer[0] = i;
                 }
+                // 向右找最后一个位置
                 for (int i = middle + 1; i < nums.length && nums[i] == target; ++i) {
                     answer[1] = i;
                 }
@@ -121,6 +124,51 @@ class Solution {
 -   执行结果：通过
 -   执行用时：0 ms, 在所有 Java 提交中击败了 100.00%的用户
 -   内存消耗：35.9 MB, 在所有 Java 提交中击败了 70.57%的用户
+:::
+
+
+```java
+class Solution {
+    public int splitArray(int[] nums, int m) {
+        int left = 0;
+        int right = 0;
+        for (int i = 0; i < nums.length; i++) {
+            right += nums[i];
+            if (left < nums[i]) {
+                left = nums[i];
+            }
+        }
+        while (left <= right) {
+            int middle = (right - left) / 2 + left;
+            if (check(nums, middle, m)) {
+                right = middle - 1;
+            } else {
+                left = middle + 1;
+            }
+        }
+
+        return left;
+    }
+
+    private boolean check(int[] nums, int x, int m) {
+        int sum = 0;
+        int count = 1;
+        for (int i = 0; i < nums.length; i++) {
+            if (sum + nums[i] > x) {
+                count++;
+                sum = nums[i];
+            } else {
+                sum += nums[i];
+            }
+        }
+        return count <= m;
+    }
+}
+```
+
+:::tip 执行结果：通过
+-   执行用时：0 ms, 在所有 Java 提交中击败了100.00%的用户
+-   内存消耗：35.8 MB, 在所有 Java 提交中击败了90.57%的用户
 :::
 
 ## [leetcode1004 最大连续 1 的个数 III](https://leetcode-cn.com/problems/max-consecutive-ones-iii/)
