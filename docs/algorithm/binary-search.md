@@ -34,7 +34,7 @@ class Solution {
 
 -   执行用时：0 ms, 在所有 Java 提交中击败了 100.00%的用户
 -   内存消耗：39.3 MB, 在所有 Java 提交中击败了 76.21%的用户
-    :::
+:::
 
 ## [leetcode34 在排序数组中查找元素的第一个和最后一个位置](https://leetcode-cn.com/problems/find-first-and-last-position-of-element-in-sorted-array/)
 
@@ -70,7 +70,7 @@ class Solution {
 
 -   执行用时：0 ms, 在所有 Java 提交中击败了 100.00%的用户
 -   内存消耗：41.6 MB, 在所有 Java 提交中击败了 49.97%的用户
-    :::
+:::
 
 ## [leetcode410 分割数组的最大值](https://leetcode-cn.com/problems/split-array-largest-sum/)
 
@@ -121,7 +121,7 @@ class Solution {
 -   执行结果：通过
 -   执行用时：0 ms, 在所有 Java 提交中击败了 100.00%的用户
 -   内存消耗：35.9 MB, 在所有 Java 提交中击败了 70.57%的用户
-    :::
+:::
 
 ## [leetcode1004 最大连续 1 的个数 III](https://leetcode-cn.com/problems/max-consecutive-ones-iii/)
 
@@ -164,7 +164,7 @@ class Solution {
 
 -   执行用时：17 ms, 在所有 Java 提交中击败了 7.25%的用户
 -   内存消耗：40.6 MB, 在所有 Java 提交中击败了 9.32%的用户
-    :::
+:::
 
 ## [leetcode33 搜索旋转排序数组](https://leetcode-cn.com/problems/search-in-rotated-sorted-array/)
 
@@ -207,4 +207,4 @@ class Solution {
 
 -   执行用时：0 ms, 在所有 Java 提交中击败了 100.00%的用户
 -   内存消耗：37.7 MB, 在所有 Java 提交中击败了 67.71%的用户
-    :::
+:::
