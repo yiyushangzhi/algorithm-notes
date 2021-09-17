@@ -82,8 +82,8 @@ class UnionFind {
 ```java
 class UnionFind {
     private int find(int[] parent, int x) {
-        if (parent[x] == x) {
-            return find(parent[x]);
+        if (parent[x] != x) {
+            return find(parent, parent[x]);
         }
         return parent[x];
     }
