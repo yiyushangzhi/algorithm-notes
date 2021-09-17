@@ -12,12 +12,12 @@
 
 ## 经典例题
 
--   [LeetCode3 无重复字符的最长子串](#leetcode3-无重复字符的最长子串)
--   [LeetCode76 最小覆盖子串](#leetcode76-最小覆盖子串)
--   [LeetCode209 长度最小的子数组](#leetcode209-长度最小的子数组)
--   [LeetCode1004 最大连续1的个数III](#leetcode1004-最大连续1的个数iii)
+-   [leetcode3 无重复字符的最长子串](#leetcode3-无重复字符的最长子串)
+-   [leetcode76 最小覆盖子串](#leetcode76-最小覆盖子串)
+-   [leetcode209 长度最小的子数组](#leetcode209-长度最小的子数组)
+-   [leetcode1004 最大连续1的个数III](#leetcode1004-最大连续1的个数iii)
 
-## [LeetCode3 无重复字符的最长子串](https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/)
+## [leetcode3 无重复字符的最长子串](https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/)
 
 ```java
 class Solution {
@@ -130,7 +130,7 @@ class Solution {
 -   内存消耗：38.7 MB, 在所有 Java 提交中击败了29.87%的用户
 :::
 
-## [LeetCode76 最小覆盖子串](https://leetcode-cn.com/problems/minimum-window-substring/)
+## [leetcode76 最小覆盖子串](https://leetcode-cn.com/problems/minimum-window-substring/)
 
 ```java
 class Solution {
@@ -191,7 +191,7 @@ class Solution {
 :::
 
 
-## [LeetCode209 长度最小的子数组](https://leetcode-cn.com/problems/minimum-size-subarray-sum/)
+## [leetcode209 长度最小的子数组](https://leetcode-cn.com/problems/minimum-size-subarray-sum/)
 
 ```java
 class Solution {
@@ -274,15 +274,15 @@ class Solution {
     }
 }
 ```
-> 作者：LeetCode-Solution
+> 作者：leetcode-Solution
 >
 > 链接：https://leetcode-cn.com/problems/minimum-size-subarray-sum/solution/chang-du-zui-xiao-de-zi-shu-zu-by-leetcode-solutio/
 >
-> 来源：力扣（LeetCode）
+> 来源：力扣（leetcode）
 >
 > 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
 
-## [LeetCode1004 最大连续1的个数III](https://leetcode-cn.com/problems/max-consecutive-ones-iii/)
+## [leetcode1004 最大连续1的个数III](https://leetcode-cn.com/problems/max-consecutive-ones-iii/)
 
 题目要求可以理解成**最多包含k个0的连续子数组的最大长度**。
 

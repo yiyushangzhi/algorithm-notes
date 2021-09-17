@@ -9,9 +9,12 @@
 ### 递归回溯
 
 ```java
-class Solution {
+class Solution<T> {
   // n：用来控制递归深度
   private int n;
+
+  // 解空间
+  private T[] x;
 
   // t：当前递归深度
   void backtrack(int t) {
@@ -64,14 +67,14 @@ class Solution {
 
 ## 经典例题
 
--   [LeetCode51 N 皇后](#leetcode51-n-皇后)
--   [LeetCode78 子集](#leetcode78-子集)
--   [LeetCode46 全排列](#leetcode46-全排列)
--   [LeetCode47 全排列 II](#leetcode47-全排列-ii)
--   [LeetCode39 组合总和](#leetcode39-组合总和)
--   [LeetCode216 组合总和 III](#leetcode216-组合总和-iii)
+-   [leetcode51 N 皇后](#leetcode51-n-皇后)
+-   [leetcode78 子集](#leetcode78-子集)
+-   [leetcode46 全排列](#leetcode46-全排列)
+-   [leetcode47 全排列 II](#leetcode47-全排列-ii)
+-   [leetcode39 组合总和](#leetcode39-组合总和)
+-   [leetcode216 组合总和 III](#leetcode216-组合总和-iii)
 
-## [LeetCode51 N 皇后](https://leetcode-cn.com/problems/n-queens/)
+## [leetcode51 N 皇后](https://leetcode-cn.com/problems/n-queens/)
 
 ### 题目描述
 
@@ -103,6 +106,7 @@ class Solution {
 ```java
 class Solution {
 	public List<List<String>> solveNQueens(int n) {
+        // 定义解空间：存储每一行放置了棋子的列编号
         int[] rows = new int[n];
         List<List<String>> answers = new ArrayList<>();
         backtrack(0, n, rows, answers);
@@ -128,6 +132,7 @@ class Solution {
         }
 
         for (int col = 0; col < capacity; col++) {
+            // 剪纸
             if (placable(row, col, rows)) {
                 rows[row] = col;
                 backtrack(row + 1, capacity, rows, answers);
@@ -138,6 +143,9 @@ class Solution {
     private boolean placable(int row, int col, int[] rows) {
         for (int r = 0; r < row; r++) {
             int c = rows[r];
+            // 1. 棋子一行一行地放置，所以不需要判断行冲突
+            // 2. 判断当前列已放置过棋子：c == col 
+            // 3. 判断当前位置的对角线上是否放置过棋子：row + col == r + c || row - col == r - c
             if (c == col || row + col == r + c || row - col == r - c) {
                 return false;
             }
@@ -147,7 +155,7 @@ class Solution {
 };
 ```
 
-## [LeetCode78 子集](https://leetcode-cn.com/problems/subsets/)
+## [leetcode78 子集](https://leetcode-cn.com/problems/subsets/)
 
 ### 解法一
 
@@ -181,15 +189,17 @@ class Solution {
         return answers;
     }
     private void dfs(int[] nums, int i) {
-       if (i == nums.length) {
-           answers.add(new LinkedList<>(answer));
-           return;
-       }
-
-       answer.add(nums[i]);
-       dfs(nums, i + 1);
-       answer.remove(answer.size() - 1);
-       dfs(nums, i + 1);
+        if (i == nums.length) {
+            answers.add(new LinkedList<>(answer));
+            return;
+        }
+        
+        // 考虑选择当前位置
+        answer.add(nums[i]);
+        dfs(nums, i + 1);
+        answer.remove(answer.size() - 1);
+        // 考虑不选择当前位置 
+        dfs(nums, i + 1);
    }
 }
 ```
@@ -225,7 +235,7 @@ class Solution {
 }
 ```
 
-## [LeetCode46 全排列](https://leetcode-cn.com/problems/permutations/)
+## [leetcode46 全排列](https://leetcode-cn.com/problems/permutations/)
 
 ### 解法一
 
@@ -285,9 +295,43 @@ class Solution {
 }
 ```
 
-## [LeetCode47 全排列 II](https://leetcode-cn.com/problems/permutations-ii/)
+### 解法三
+
+```java
+class Solution {
+    public List<List<Integer>> permute(int[] nums) {
+        List<List<Integer>> answers = new ArrayList<>();
+        backtrack(nums, answers, new LinkedList<>());
+        return answers;
+    }
+
+    private void backtrack(int[] nums, List<List<Integer>> answers, Deque<Integer> answer) {
+        if (answer.size() == nums.length) {
+            answers.add(new ArrayList<>(answer));
+            return;
+        }
+
+        for (int num : nums) {
+            if (!answer.contains(num)) {
+                answer.add(num);
+                backtrack(nums, answers, answer);
+                answer.removeLast();
+            }
+        }
+    }
+}
+```
+
+:::tip 执行结果：通过
+-   执行用时：1 ms, 在所有 Java 提交中击败了85.12%的用户
+-   内存消耗：38.7 MB, 在所有 Java 提交中击败了36.39%的用户
+:::
+
+## [leetcode47 全排列 II](https://leetcode-cn.com/problems/permutations-ii/)
 
 [全排列](#leetcode46-全排列)的变种，需要去除重复记录。只需要将数组先排序一下，然后只保留从左到右第一个元素即可。
+
+### 解法一
 
 ```java
 class Solution {
@@ -331,6 +375,8 @@ class Solution {
 -   执行用时：4 ms, 在所有 Java 提交中击败了 23.30%的用户
 -   内存消耗：38.8 MB, 在所有 Java 提交中击败了 93.68%的用户
 :::
+
+### 解法二
 
 ```java
 class Solution {
@@ -377,7 +423,7 @@ class Solution {
 
 > 可以发现，剪枝函数`isRepeatNumber`的实现不同，时间开销也不同。具体差异，见[leetcode 分析](https://leetcode-cn.com/problems/permutations-ii/solution/hui-su-suan-fa-python-dai-ma-java-dai-ma-by-liwe-2/)
 
-## [LeetCode39 组合总和](https://leetcode-cn.com/problems/combination-sum/)
+## [leetcode39 组合总和](https://leetcode-cn.com/problems/combination-sum/)
 
 第一反应是套用回溯算法通用公式，由于可以元素可以重复计算，所以就不维护`visits[i]`来表示元素是否访问过。于是可以得到如下代码：
 
@@ -485,7 +531,7 @@ class Solution {
 -   内存消耗：38.7 MB, 在所有 Java 提交中击败了 46.65%的用户
 :::
 
-## [LeetCode216 组合总和 III](https://leetcode-cn.com/problems/combination-sum-iii/)
+## [leetcode216 组合总和 III](https://leetcode-cn.com/problems/combination-sum-iii/)
 
 ```java
 class Solution {
@@ -546,8 +592,6 @@ public class Maze {
         this.visited = new boolean[rows][cols];
         this.visited[0][0] = true;
         this.move(0, 0);
-
-
         return this.count;
     }
 
@@ -588,4 +632,56 @@ public class Maze {
     }
 }
 
+```
+
+## 迷宫最短路径
+
+```java
+import java.util.Deque;
+import java.util.LinkedList;
+
+public class MinPathOfMaze {
+    public int solve(int[][] maze, int startX, int startY, int targetX, int targetY) {
+        if (maze == null || maze.length == 0) {
+            return -1;
+        }
+        int rows = maze.length;
+        int cols = maze[0].length;
+        int[][] dp = new int[rows][cols];
+        boolean[][] visits = new boolean[rows][cols];
+        int[][] diffs = new int[][]{{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
+        Deque<int[]> queue = new LinkedList<>();
+        dp[startX][startY] = 0;
+        visits[startX][startY] = true;
+        queue.offer(new int[]{startX, startY});
+        while (!queue.isEmpty()) {
+            int[] position = queue.poll();
+            int x = position[0];
+            int y = position[1];
+            for (int[] diff : diffs) {
+                int nextX = x + diff[0];
+                int nextY = y + diff[1];
+                if (nextX < 0 || nextX >= rows || nextY < 0 || nextY >= cols
+                        || visits[nextX][nextY] || maze[nextX][nextY] == 1) {
+                    continue;
+                }
+                visits[nextX][nextY] = true;
+                queue.offer(new int[]{nextX, nextY});
+                dp[nextX][nextY] = dp[x][y] + 1;
+            }
+        }
+        return dp[targetX][targetY];
+    }
+
+    public static void main(String[] args) {
+        MinPathOfMaze solution = new MinPathOfMaze();
+        System.out.println(solution.solve(new int[][]{
+                {0, 1, 1, 1, 0},
+                {0, 0, 1, 0, 1},
+                {1, 0, 0, 0, 1},
+                {0, 0, 1, 0, 0},
+                {1, 0, 1, 0, 0}
+        }, 0, 0, 4, 4));
+    }
+}
 ```

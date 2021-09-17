@@ -224,16 +224,16 @@ class RankUnionFind {
 
 ## 经典例题
 
--   [LeetCode990 等式方程的可满足性](#leetcode990-等式方程的可满足性)
--   [LeetCode547 省份数量](#leetcode547-省份数量)
--   [LeetCode200 岛屿数量](#leetcode200-岛屿数量)
--   [LeetCode684 冗余连接](#leetcode684-冗余连接)
--   [LeetCode1319 连通网络的操作次数](#leetcode-连通网络的操作次数)
--   [LeetCode959 由斜杠划分区域](#leetcode959-由斜杠划分区域)
--   [LeetCode399 除法求值](#leetcode399-除法求值)
--   [LeetCode952 按公因数计算最大组件大小](#leetcode952-按公因数计算最大组件大小)
+-   [leetcode990 等式方程的可满足性](#leetcode990-等式方程的可满足性)
+-   [leetcode547 省份数量](#leetcode547-省份数量)
+-   [leetcode200 岛屿数量](#leetcode200-岛屿数量)
+-   [leetcode684 冗余连接](#leetcode684-冗余连接)
+-   [leetcode1319 连通网络的操作次数](#leetcode-连通网络的操作次数)
+-   [leetcode959 由斜杠划分区域](#leetcode959-由斜杠划分区域)
+-   [leetcode399 除法求值](#leetcode399-除法求值)
+-   [leetcode952 按公因数计算最大组件大小](#leetcode952-按公因数计算最大组件大小)
 
-## [LeetCode990 等式方程的可满足性](https://leetcode-cn.com/problems/satisfiability-of-equality-equations/)
+## [leetcode990 等式方程的可满足性](https://leetcode-cn.com/problems/satisfiability-of-equality-equations/)
 
 ### 解法一：合并集（循环查找）
 
@@ -330,7 +330,7 @@ class Solution {
 -   内存消耗：37.8 MB, 在所有 Java 提交中击败了 84.47%的用户
 :::
 
-## [LeetCode547 省份数量](https://leetcode-cn.com/problems/number-of-provinces/)
+## [leetcode547 省份数量](https://leetcode-cn.com/problems/number-of-provinces/)
 
 ### 解法一：DFS
 
@@ -435,7 +435,7 @@ class Solution {
 -   内存消耗：39.5 MB, 在所有 Java 提交中击败了 31.86%的用户
 :::
 
-## [LeetCode200 岛屿数量](https://leetcode-cn.com/problems/number-of-islands/)
+## [leetcode200 岛屿数量](https://leetcode-cn.com/problems/number-of-islands/)
 
 ### 解法一：合并集
 
@@ -693,7 +693,7 @@ class Solution {
 -   内存消耗：40.9 MB, 在所有 Java 提交中击败了 39.64%的用户
 :::
 
-## [LeetCode684 冗余连接](https://leetcode-cn.com/problems/redundant-connection/)
+## [leetcode684 冗余连接](https://leetcode-cn.com/problems/redundant-connection/)
 
 ```java
 public class Solution {
@@ -734,7 +734,7 @@ public class Solution {
 -   内存消耗：38.3 MB, 在所有 Java 提交中击败了 95.69%的用户
 :::
 
-## [LeetCode1319 连通网络的操作次数](https://leetcode-cn.com/problems/number-of-operations-to-make-network-connected/)
+## [leetcode1319 连通网络的操作次数](https://leetcode-cn.com/problems/number-of-operations-to-make-network-connected/)
 
 ```java
 public class Solution {
@@ -777,7 +777,7 @@ public class Solution {
 -   内存消耗：52.2 MB, 在所有 Java 提交中击败了 82.73%的用户
 :::
 
-## [LeetCode959 由斜杠划分区域](https://leetcode-cn.com/problems/regions-cut-by-slashes/)
+## [leetcode959 由斜杠划分区域](https://leetcode-cn.com/problems/regions-cut-by-slashes/)
 
 
 ```java
@@ -866,7 +866,7 @@ class Solution {
 -   内存消耗：37.7 MB, 在所有 Java 提交中击败了 62.63%的用户
 :::
 
-## [LeetCode399 除法求值](https://leetcode-cn.com/problems/evaluate-division/)
+## [leetcode399 除法求值](https://leetcode-cn.com/problems/evaluate-division/)
 
 ```java
 class Solution {
@@ -960,6 +960,6 @@ class Solution {
 -   内存消耗：37.1 MB, 在所有 Java 提交中击败了74.46%的用户
 :::
 
-## [LeetCode952 按公因数计算最大组件大小](https://leetcode-cn.com/problems/largest-component-size-by-common-factor/)
+## [leetcode952 按公因数计算最大组件大小](https://leetcode-cn.com/problems/largest-component-size-by-common-factor/)
 
 todo

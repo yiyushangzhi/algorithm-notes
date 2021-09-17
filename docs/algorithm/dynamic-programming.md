@@ -7,16 +7,16 @@
 ## 经典例题
 
 -   计数问题
-    -   [LeetCode62 不同路径](#leetcode62-不同路径)
+    -   [leetcode62 不同路径](#leetcode62-不同路径)
 -   最值问题
-    -   [LeetCode64 最小路径和](#leetcode64-最小路径和)
-    -   [LeetCode53 最大子序列和](#leetcode53-最大子序列和)
-    -   [LeetCode322 零钱兑换](#leetcode322-零钱兑换)
-    -   [LeetCode72 编辑距离](#leetcode72-编辑距离)
-    -   [LeetCode410 分割数组的最大值](#leetcode410-分割数组的最大值)
-    -   [LeetCode1240 铺瓷砖](#leetcode1240-铺瓷砖)
+    -   [leetcode64 最小路径和](#leetcode64-最小路径和)
+    -   [leetcode53 最大子序列和](#leetcode53-最大子序列和)
+    -   [leetcode322 零钱兑换](#leetcode322-零钱兑换)
+    -   [leetcode72 编辑距离](#leetcode72-编辑距离)
+    -   [leetcode410 分割数组的最大值](#leetcode410-分割数组的最大值)
+    -   [leetcode1240 铺瓷砖](#leetcode1240-铺瓷砖)
 -   存在性问题
-    -   [LeetCode403 青蛙过河](#leetcode403-青蛙过河)
+    -   [leetcode403 青蛙过河](#leetcode403-青蛙过河)
 
 ## 解题套路
 
@@ -27,7 +27,7 @@
 
 ## 计数问题
 
-### [LeetCode62 不同路径](https://leetcode-cn.com/problems/unique-paths/)
+### [leetcode62 不同路径](https://leetcode-cn.com/problems/unique-paths/)
 
 #### 题目描述
 
@@ -123,7 +123,7 @@ class Solution {
 
 ## 最值问题
 
-### [LeetCode64 最小路径和](https://leetcode-cn.com/problems/minimum-path-sum/)
+### [leetcode64 最小路径和](https://leetcode-cn.com/problems/minimum-path-sum/)
 
 #### 题目描述
 
@@ -202,7 +202,7 @@ class Solution {
 }
 ```
 
-### [LeetCode53 最大子序列和](https://leetcode-cn.com/problems/maximum-subarray/)
+### [leetcode53 最大子序列和](https://leetcode-cn.com/problems/maximum-subarray/)
 
 #### 题目描述
 
@@ -305,7 +305,7 @@ class Solution {
 }
 ```
 
-### [LeetCode322 零钱兑换](https://leetcode-cn.com/problems/coin-change/)
+### [leetcode322 零钱兑换](https://leetcode-cn.com/problems/coin-change/)
 
 #### 题目描述
 
@@ -396,7 +396,7 @@ class Solution {
 }
 ```
 
-### [LeetCode72 编辑距离](https://leetcode-cn.com/problems/edit-distance/)
+### [leetcode72 编辑距离](https://leetcode-cn.com/problems/edit-distance/)
 
 #### 题目描述
 
@@ -494,7 +494,7 @@ class Solution {
 }
 ```
 
-### [LeetCode410 分割数组的最大值](https://leetcode-cn.com/problems/split-array-largest-sum/)
+### [leetcode410 分割数组的最大值](https://leetcode-cn.com/problems/split-array-largest-sum/)
 
 #### 解题思路
 
@@ -503,11 +503,17 @@ class Solution {
 假设:
 
 -   `dp[i][j]`表示前`i`个元素分成`j`个非空的连续子数组和最大值最小。
--   `sub[i]`表示以第`i`个元素结尾的子数组和。
+-   `sub[i]`表示以第`i`个元素结尾的子数组和。(使用前缀和方便求解区间和)
 
 ##### 确定转移方程
 
-`dp[i][j]=min{max{dp[k][j-1], sub(k+1, i)}}` `0 <= k <= i-1`
+枚举`k`，其中`0<=k<i`。表示前`k`个数被分成了`j-1`个个非空的连续子数组，即`dp[k][j-1]`。
+
+那么第`j`个数组为`[k+1, i]`，其和为`sub[i]-sub[k+1-1]`。
+
+子数组和要最大，即`max{ dp[k][k-1], sub[i]-sub[k] }`。
+
+连续子数组和最大值最小，即`dp[i][j]=min{max{dp[k][j-1], sub(k+1, i)}}` `0 <= k <= i-1`
 
 $dp[i][j]=\min_{0 \le k \le i}\{\max(dp[k][j-1], sub(k+1, i))\}$
 
@@ -544,7 +550,7 @@ public class Solution {
 }
 ```
 
-### [LeetCode1240 铺瓷砖](https://leetcode-cn.com/problems/tiling-a-rectangle-with-the-fewest-squares/)
+### [leetcode1240 铺瓷砖](https://leetcode-cn.com/problems/tiling-a-rectangle-with-the-fewest-squares/)
 
 #### 解题思路
 
@@ -558,7 +564,7 @@ public class Solution {
 
 ![image-20210716201136673](../asserts/leetcode1240.png)
 
-所以，转移方程为`dp[i][j]=min(dp[x][y]+dp[i-k][j-y]+dp[i-x][j-k]+dp[i+k-x][y-j+k]+1)`，其中：
+所以，转移方程为`dp[i][j]=min(dp[x][y]+dp[i-k][j-y]+dp[i-x][j-k]+dp[i-k-x][y-j+k]+1)`，其中：
 
 -   `k`的取值范围为`[1, min(i, j)]`
 -   `x`的取值范围为`[0, i-k]`
@@ -609,7 +615,7 @@ class Solution {
 
 ## 存在性问题
 
-### [LeetCode403 青蛙过河](https://leetcode-cn.com/problems/frog-jump/)
+### [leetcode403 青蛙过河](https://leetcode-cn.com/problems/frog-jump/)
 
 #### 题目描述
 

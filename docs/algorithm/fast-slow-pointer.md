@@ -8,7 +8,7 @@
 
 经典例题：
 
--   [LeetCode27 移除元素](#leetcode27-移除元素)
+-   [leetcode27 移除元素](#leetcode27-移除元素)
 
 
 ## 求链表的倒数第n个节点
@@ -88,7 +88,7 @@ class solution {
 }
 ```
 
-## LeetCode27 移除元素
+## leetcode27 移除元素
 
 ### 解法一：快慢指针
 

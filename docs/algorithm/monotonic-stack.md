@@ -3,11 +3,15 @@
 -   单调递减栈：
 
     -   定义：栈内元素数值大小从栈底到栈顶按顺序单调递减。
-    -   作用：可以找到右边第一个比当前元素大的元素。
+    -   作用：可以在遍历过程中，找到**下一个**比当前元素**大**的元素。
 
 -   单调递增栈
     -   定义：栈内元素数值大小从栈底到栈顶按顺序单调递增。
-    -   作用：可以找到右边第一个比当前元素小的元素；
+    -   作用：可以在遍历过程中，找到**下一个**比当前元素**小**的元素；
+
+> 若遍历顺序是**从左到右**，那么**下一个**就是**右边第一个**。
+> 
+> 若遍历顺序是**从右到左**，那么**下一个**就是**左边第一个**。
 
 ## 单调递减栈
 
@@ -20,15 +24,17 @@
 ```java
 Deque<Integer> monoStack = new LinkedList();
 for (int idx = 0; idx < array.length; ++idx) {
-  // 如果当前要入栈的元素大于栈顶元素，那么需要将所有比当前元素小的栈内元素弹出来。
-  while(!monoStack.isEmpty() && array[idx] > array[monoStack.peek()]) {
-    monoStack.pop();
-  }
-  monoStack.push(idx);
+    // 当前元素大于栈顶元素，直接入栈不满足单调性。
+    // 需要将所有小于当前元素的栈内元素弹出栈，再入栈。才能满足单调性。
+    while(!monoStack.isEmpty() && array[idx] > array[monoStack.peek()]) {
+        // 此时，当前元素就是下一个（右边的第一个）比被弹出的栈顶元素大的元素。
+        int topEl = monoStack.pop();
+    }
+    monoStack.push(idx);
 }
 ```
 
-### [每日温度](https://leetcode-cn.com/problems/daily-temperatures/)
+### [leetcode739 每日温度](https://leetcode-cn.com/problems/daily-temperatures/)
 
 #### 题目描述
 
@@ -67,7 +73,7 @@ class Solution {
 }
 ```
 
-### [下一个更大元素 1](https://leetcode-cn.com/problems/next-greater-element-i/)
+### [leetcode496 下一个更大元素 1](https://leetcode-cn.com/problems/next-greater-element-i/)
 
 #### 题目描述
 
@@ -156,7 +162,7 @@ class Solution {
 }
 ```
 
-### [下一个更大元素 2](https://leetcode-cn.com/problems/next-greater-element-ii/)
+### [leetcode503 下一个更大元素 2](https://leetcode-cn.com/problems/next-greater-element-ii/)
 
 #### 题目描述
 
@@ -201,7 +207,7 @@ class Solution {
 }
 ```
 
-### [股票价格跨度](https://leetcode-cn.com/problems/online-stock-span/)
+### [leetcode901 股票价格跨度](https://leetcode-cn.com/problems/online-stock-span/)
 
 #### 题目描述
 
@@ -276,14 +282,17 @@ class StockSpanner {
 ```java
 Deque<Integer> monoStack = new LinkedList<>();
 for(int idx = 0; idx < array.length; ++idx) {
-  while(!monoStack.isEmpty() && array[idx] < array[monoStack.peek()]) {
-    monoStack.pop();
-  }
-  monoStack.push(idx);
+    // 当前元素小于栈顶元素，不满足单调性。
+    // 需要将所有大于当前元素的栈内元素弹出栈，再入栈。才能满足单调性。
+    while(!monoStack.isEmpty() && array[idx] < array[monoStack.peek()]) {
+        // 此时，当前元素就是下一个（右边的第一个）比被弹出的栈顶元素小的元素。
+        monoStack.pop();
+    }
+    monoStack.push(idx);
 }
 ```
 
-### [柱状图中最大的矩形](https://leetcode-cn.com/problems/largest-rectangle-in-histogram/)
+### [leetcode84 柱状图中最大的矩形](https://leetcode-cn.com/problems/largest-rectangle-in-histogram/)
 
 #### 题目描述
 
@@ -357,18 +366,25 @@ class Solution {
     public int largestRectangleArea(int[] heights) {
         Deque<Integer> monoStack = new LinkedList<>();
         int area = 0;
+        // 为方便计算，在左右两边分别添加一个高度为0的哨兵柱子。
         int[] tempHeights = new int[heights.length + 2];
         for (int i = 0; i < heights.length; i++) {
             tempHeights[i + 1] = heights[i];
         }
+        // 矩形的面积求解公式：area = width * height。
+        // 若以某根柱子的高度为矩形高度，则左右两边第一根高度小于该柱子的两根柱子之间的间隔为矩形宽度。
         monoStack.push(0);
-        for (int index = 1; index < tempHeights.length; index++) {
-            while (tempHeights[index] < tempHeights[monoStack.peek()]) {
+        for (int right = 1; right < tempHeights.length; right++) {
+            while (tempHeights[right] < tempHeights[monoStack.peek()]) {
+                // 此时，以栈顶柱子的高度为矩形高度。
+                // 同时，已知当前柱子是栈顶柱子右边第一根高度小于栈顶柱子高度的柱子。
+                // 所以，只需要再求得栈顶柱子左边第一根高度小于栈顶柱子高度的柱子。
                 int height = tempHeights[monoStack.pop()];
-                int width = index - monoStack.peek() - 1;
+                // 由于，单调栈是单调递增的。栈顶柱子出栈以后的新栈顶柱子就是左边第一个高度小于栈顶柱子高度的柱子。
+                int width = right - monoStack.peek() - 1;
                 area = Math.max(area, width * height);
             }
-            monoStack.push(index);
+            monoStack.push(right);
         }
         return area;
     }

@@ -2,12 +2,12 @@
 
 ## 经典例题
 
--   [LeetCode704 二分查找](#leetcode704-二分查找)
--   [LeetCode34 在排序数组中查找元素的第一个和最后一个位置](#leetcode34-在排序数组中查找元素的第一个和最后一个位置)
--   [LeetCode410 分割数组的最大值](#LeetCode410-分割数组的最大值)
--   [LeetCode33 搜索旋转排序数组](#leetcode33-搜索旋转排序数组)
+-   [leetcode704 二分查找](#leetcode704-二分查找)
+-   [leetcode34 在排序数组中查找元素的第一个和最后一个位置](#leetcode34-在排序数组中查找元素的第一个和最后一个位置)
+-   [leetcode410 分割数组的最大值](#leetcode410-分割数组的最大值)
+-   [leetcode33 搜索旋转排序数组](#leetcode33-搜索旋转排序数组)
 
-## [LeetCode704 二分查找](https://leetcode-cn.com/problems/binary-search/)
+## [leetcode704 二分查找](https://leetcode-cn.com/problems/binary-search/)
 
 ```java
 class Solution {
@@ -36,7 +36,7 @@ class Solution {
 -   内存消耗：39.3 MB, 在所有 Java 提交中击败了 76.21%的用户
     :::
 
-## [LeetCode34 在排序数组中查找元素的第一个和最后一个位置](https://leetcode-cn.com/problems/find-first-and-last-position-of-element-in-sorted-array/)
+## [leetcode34 在排序数组中查找元素的第一个和最后一个位置](https://leetcode-cn.com/problems/find-first-and-last-position-of-element-in-sorted-array/)
 
 ```java
 class Solution {
@@ -72,7 +72,7 @@ class Solution {
 -   内存消耗：41.6 MB, 在所有 Java 提交中击败了 49.97%的用户
     :::
 
-## [LeetCode410 分割数组的最大值](https://leetcode-cn.com/problems/split-array-largest-sum/)
+## [leetcode410 分割数组的最大值](https://leetcode-cn.com/problems/split-array-largest-sum/)
 
 **使...最大值尽可能小**是二分搜索题目的经典问法。
 
@@ -123,7 +123,7 @@ class Solution {
 -   内存消耗：35.9 MB, 在所有 Java 提交中击败了 70.57%的用户
     :::
 
-## [LeetCode1004 最大连续 1 的个数 III](https://leetcode-cn.com/problems/max-consecutive-ones-iii/)
+## [leetcode1004 最大连续 1 的个数 III](https://leetcode-cn.com/problems/max-consecutive-ones-iii/)
 
 思路：先将 0 变成 1，1 变成 0。求不超过 k 个 1 的连续子数组的最大长度。为方便计算，可以使用**前缀和**简化连续子数组区间内 1 的个数。
 
@@ -166,7 +166,7 @@ class Solution {
 -   内存消耗：40.6 MB, 在所有 Java 提交中击败了 9.32%的用户
     :::
 
-## [LeetCode33 搜索旋转排序数组](https://leetcode-cn.com/problems/search-in-rotated-sorted-array/)
+## [leetcode33 搜索旋转排序数组](https://leetcode-cn.com/problems/search-in-rotated-sorted-array/)
 
 ```java
 class Solution {

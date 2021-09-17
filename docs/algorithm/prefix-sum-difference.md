@@ -54,7 +54,7 @@ class Solution {
 }
 ```
 
-### [LeetCode1904 拼车](https://leetcode-cn.com/problems/car-pooling/)
+### [leetcode1904 拼车](https://leetcode-cn.com/problems/car-pooling/)
 
 ```java
 class Solution {
@@ -91,7 +91,7 @@ class Solution {
 -   内存消耗：38.4 MB, 在所有 Java 提交中击败了 34.09%的用户
 :::
 
-### [LeetCode1109 航班预定统计](https://leetcode-cn.com/problems/corporate-flight-bookings/)
+### [leetcode1109 航班预定统计](https://leetcode-cn.com/problems/corporate-flight-bookings/)
 
 ```java
 class Solution {
