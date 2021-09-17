@@ -88,7 +88,7 @@ class solution {
 }
 ```
 
-## leetcode27 移除元素
+## [leetcode27 移除元素](https://leetcode-cn.com/problems/remove-element/)
 
 ### 解法一：快慢指针
 
